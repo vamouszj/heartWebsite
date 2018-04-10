@@ -8,8 +8,8 @@
       </el-breadcrumb>
 
       <div class="container-div">
-        <el-tabs v-model="activeTypeName" type="card"  @tab-click="changeMusicByType">
-          <el-tab-pane :label="pane.label" :name="pane.name" v-for="(pane, index) in typePane" :key="index">
+        <el-tabs v-model="activeTypeId" type="card"  @tab-click="changeMusicByType">
+          <el-tab-pane :label="pane.music_type_name" :name="pane.music_type_id + ''" v-for="(pane, index) in typePane" :key="index">
             <div>
               <div v-for="music in music.leftPart" @click="toOneMusic(music.music_id)"
                    class="cursor music-item clearfix">
@@ -66,22 +66,9 @@
   export default {
     data() {
       return {
-        activeTypeName: '1',
+        activeTypeId: '',
         typeHasChanged: false,
-        typePane: [
-          {
-            label: '轻音乐',
-            name: '1'
-          },
-          {
-            label: '古典',
-            name: '2'
-          },
-          {
-            label: '古风',
-            name: '3'
-          }
-        ],
+        typePane: [],
         music: {
           leftPart: [],
           reightPart: []
@@ -97,7 +84,7 @@
     mounted() {
       let vm = this;
 
-      vm.getMusics('1', 1);
+      vm.getMusicType();
 
       if(window.sessionStorage.getItem('usr')) {
         vm.showHome = true;
@@ -106,10 +93,23 @@
       }
     },
     methods: {
+      getMusicType() {
+        let vm = this;
+
+        vm.$ajax.post('/apis/music/getMusicType').then((res) => {
+          if(res.data.state) {
+            vm.typePane = res.data.labels;
+
+            vm.activeTypeId = vm.typePane[0].music_type_id + '';
+            vm.getMusics(vm.activeTypeId, 1);
+          }
+        });
+      },
       //关于音乐的话，每页为十条数据
       getMusics(type, currentPage) {
         let vm = this;
         let obj = {};
+        console.log(type);
 
         Object.assign(obj, {type: type}, {currentPage: currentPage});
 
@@ -130,7 +130,7 @@
         let vm = this;
         vm.flag = false;  //不需要利用分页接口去请求数据
 
-        vm.getMusics(vm.activeTypeName, 1);
+        vm.getMusics(vm.activeTypeId, 1);
       },
       handleCurrentChange(page) {
         let vm = this;
@@ -145,10 +145,12 @@
           vm.notChange = false;
           return;
         }
-        vm.getMusics(vm.activeTypeName, page);
+
+        vm.getMusics(vm.activeTypeId, page);
       },
       toOneMusic(num) {
-        window.open('http://localhost:8080/#/play/' + num, '_blank');
+        /*window.open('http://localhost:8080/#/play/' + num, '_blank');*/
+        window.open('http://192.168.0.113:8888/#/play/' + num, '_blank');
       }
     },
     components: {

@@ -153,7 +153,8 @@
         })
       },
       toOneMusic(num) {
-        window.open('http://localhost:8080/#/play/' + num, '_blank');
+        /*window.open('http://localhost:8080/#/play/' + num, '_blank');*/
+        window.open('http://192.168.0.113:8888/#/play/' + num, '_blank');
       },
       toOneTest(num) {
         this.$router.push({

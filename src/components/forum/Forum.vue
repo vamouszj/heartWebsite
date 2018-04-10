@@ -11,7 +11,7 @@
       <div class="container-div">
         <div v-for="forum in forums" @click="toOneForum(forum.forum_id)" class="cursor forum-item clearfix">
           <div class="forum-outer">
-            <h3><span class="mr10">{{'[ ' + typePane[forum.type - 1] + ' ]'}}</span> {{forum.title}}</h3>
+            <h3><span class="mr10">{{forum.typeName}}</span> {{forum.title}}</h3>
 
             <div style="margin: 10px auto;">
               <i class="el-icon-edit mr10"></i><span class="mr30">{{forum.name}}</span>
