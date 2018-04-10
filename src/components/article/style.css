@@ -1,0 +1,96 @@
+.first-icon {
+  color: #999999;
+  margin-left: 8px;
+  margin-right: 15px;
+}
+.second-icon {
+  color: #999999;
+  margin-left: 8px;
+}
+/*单篇 评论*/
+.comment-container {
+  margin-top: 30px;
+  font-size: 14px;
+}
+.first-level {
+  text-align: left;
+  padding: 10px;
+  color: #3390FF;
+}
+.first-level-name {
+  display: inline-block;
+  margin: 10px auto;
+}
+.first-level-content {
+  display: inline-block;
+  color: #666666;
+}
+.first-date {
+  float: left;
+  color: #999999;
+}
+.more-level {
+  float: right;
+  color: #21A88B;
+}
+.more-level-container {
+  background: #EFF0F2;
+  margin: 10px 10px;
+  display: none;
+}
+.more-level-comment {
+  text-align: left;
+  padding: 3px 20px;
+  color: #F2CF2E;
+}
+.more-level-name {
+  display: inline-block;
+  margin: 10px 5px;
+}
+.child-content {
+  display: inline-block;
+  color: #666666;
+  margin-left: 5px;
+}
+.bottom-border {
+  margin: 8px auto;
+  border-bottom: 1px solid #EDEDED;
+}
+.submit-button {
+  margin: 0 20px;
+  text-align: right;
+  padding-bottom: 10px;
+}
+.submit-child-comment{
+  margin: 0 20px;
+  text-align: right;
+  padding-bottom: 10px;
+}
+/*end*/
+
+/*文章列表*/
+.pane-div {
+  width: 98%;
+  background: #FFF;
+  border: 1px solid #EDEDED;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+.left-part {
+  float: left;
+  width: 40%;
+  border-right: 1px solid #EDEDED;
+}
+.left-img {
+  width: 100%;
+  height: 250px;
+}
+.right-part {
+  width: 50%;
+  float: left;
+  margin: 15px 29px;
+}
+.content-container {
+  margin-top: 10px;
+  color: #000;
+}

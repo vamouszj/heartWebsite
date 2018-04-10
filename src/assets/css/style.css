@@ -1,0 +1,59 @@
+.container {
+  width: 85%;
+  margin: 20px auto;
+}
+.container-div {
+  margin-top: 20px;
+  border: 1px solid #EDEDED;
+  padding: 28px 6% 29px 6%;
+}
+.clearfix:after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+.clearfix{
+  *zoom: 1;
+}
+.cursor {
+  cursor: pointer;
+}
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+.pl10 {
+  padding-left:10px;
+}
+.pr15 {
+  padding-right: 15px
+}
+.pt40 {
+  padding-top: 40px;
+}
+.mb80 {
+  margin-bottom: 80px;
+}
+.display-none {
+  display: none;
+}
+.mt30 {
+  margin-top: 30px;
+}
+.mt25 {
+  margin-top: 25px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mt15 {
+  margin-top: 15px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.ml10 {
+  margin-left: 10px;
+}

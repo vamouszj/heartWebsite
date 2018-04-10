@@ -1,0 +1,104 @@
+.mr10 {
+  margin-right: 10px;
+}
+.forum-item {
+  width: 98%;
+  background: #FFF;
+  border: 1px solid #EDEDED;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+.forum-outer {
+  width: 96%;
+  margin: 20px auto;
+}
+.mr30 {
+  margin-right: 30px;
+}
+.forum-item-p {
+  margin-top: 10px;
+  color: #000;
+}
+.mt25 {
+  margin-top: 25px;
+}
+.mb100 {
+  margin-bottom: 100px;
+}
+.comment-left {
+  float: left;
+  width: 7%;
+}
+.comment-right {
+  float: left;
+  width: 91%;
+}
+.right-button {
+  margin: 10px auto;
+  text-align: right;
+}
+
+/*评论相关*/
+.comment-container {
+  margin-top: 30px;
+  font-size: 14px;
+}
+.comment-item-outer {
+  margin: 8px auto;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #EDEDED;
+}
+.first-level {
+  text-align: left;
+  padding: 10px;
+  color: #3390FF;
+}
+.first-level-name {
+  display: inline-block;
+  margin: 10px auto;
+}
+.first-level-content {
+  display: inline-block;
+  color: #666666;
+}
+.first-date {
+  float: left;
+  color: #999999;
+}
+.more-level {
+  float: right;
+  color: #21A88B;
+}
+.more-level-container {
+  background: #EFF0F2;
+  margin: 10px 10px;
+  display: none;
+}
+.more-level-comment {
+  text-align: left;
+  padding: 3px 20px;
+  color: #F2CF2E;
+}
+.more-level-name {
+  display: inline-block;
+  margin: 10px 5px;
+}
+.child-content {
+  display: inline-block;
+  color: #666666;
+  margin-left: 5px;
+}
+.bottom-border {
+  margin: 8px auto;
+  border-bottom: 1px solid #EDEDED;
+}
+.submit-button {
+  margin: 0 20px;
+  text-align: right;
+  padding-bottom: 10px;
+}
+.submit-child-comment{
+  margin: 0 20px;
+  text-align: right;
+  padding-bottom: 10px;
+}

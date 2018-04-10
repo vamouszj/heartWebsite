@@ -1,0 +1,22 @@
+.test-item {
+  width: 45%;
+  height:110px;
+  background: #FFF;
+  border: 1px solid #EDEDED;
+  border-radius: 10px;
+  margin: 8px 45px auto auto;
+}
+.border-right {
+  border-right: 1px solid #EDEDED;
+}
+.left-img {
+  width: 140px;
+  height: 110px;
+}
+.item-content {
+  width: 40%;
+  margin: 15px 40px;
+}
+.item-test-name {
+  margin: 10px auto 20px auto;
+}
