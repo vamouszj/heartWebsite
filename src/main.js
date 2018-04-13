@@ -10,7 +10,7 @@ import axios from 'axios'
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-require('./mock');
+/*require('./mock');*/
 require('./assets/css/style.css')
 
 /* eslint-disable no-new */

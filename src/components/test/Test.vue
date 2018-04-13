@@ -8,8 +8,8 @@
       </el-breadcrumb>
 
       <div style="margin-top: 20px; border: 1px solid #EDEDED;padding: 28px 6% 29px 6%;">
-        <el-tabs v-model="activeTypeName" type="card"  @tab-click="changePaperByType">
-          <el-tab-pane :label="pane.label" :name="pane.name" v-for="(pane, index) in typePane" :key="index">
+        <el-tabs v-model="activeTypeId" type="card"  @tab-click="changePaperByType">
+          <el-tab-pane :label="pane.test_type_name" :name="pane.test_type_id + ''" v-for="(pane, index) in typePane" :key="index">
             <div>
               <div v-for="paper in papers.leftPart" @click="toOneTest(paper.test_id)"
                    class="clearfix cursor left test-item">
@@ -62,7 +62,7 @@
   export default {
     data() {
       return {
-        activeTypeName: '1',
+        activeTypeId: '',
         typeHasChanged: false,
         typePane: [
           {
@@ -97,7 +97,7 @@
     mounted() {
       let vm = this;
 
-      vm.getTests('1', 1);
+      vm.getTestType();
 
       if(window.sessionStorage.getItem('usr')) {
         vm.showHome = true;
@@ -106,6 +106,18 @@
       }
     },
     methods: {
+      getTestType() {
+        let vm = this;
+
+        vm.$ajax.post('/apis/test/getTestType').then((res) => {
+          if(res.data.state) {
+            vm.typePane = res.data.labels;
+
+            vm.activeTypeId = vm.typePane[0].test_type_id + '';
+            vm.getTests(vm.activeTypeId, 1);
+          }
+        });
+      },
       //关于测试的话，每页为十条数据
       getTests(type, currentPage) {
         let vm = this;
@@ -130,7 +142,7 @@
         let vm = this;
         vm.flag = false;  //不需要利用分页接口去请求数据
 
-        vm.getTests(vm.activeTypeName, 1);
+        vm.getTests(vm.activeTypeId, 1);
       },
       handleCurrentChange(page) {
         let vm = this;
@@ -145,7 +157,7 @@
           vm.notChange = false;
           return;
         }
-        vm.getTests(vm.activeTypeName, page);
+        vm.getTests(vm.activeTypeId, page);
       },
       toOneTest(num) {
         this.$router.push({

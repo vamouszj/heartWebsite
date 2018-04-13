@@ -8,7 +8,7 @@ const urls = {
         'article_id|+100': 3456,
         'title': '@ctitle(10)',
         'upload_date': '@date("yyyy-MM-dd")',
-        'type|1': [1, 2, 3],
+        'typeName': '@ctitle(5)',
         'author': '@ctitle(10)',
         'description': '@ctitle(100)',
         'content': '@ctitle(300)',
@@ -27,7 +27,7 @@ const urls = {
         'musician': '@ctitle(20)',
         'upload_date': '@date("yyyy-MM-dd")',
         'description': '@ctitle(100)',
-        'type|1': [1, 2, 3],
+        'typeName': '@ctitle(5)',
         'play_num|+100': 3445,
         'img_addr|1': ['/static/img/music/mus1.jpg', '/static/img/music/mus2.jpg', '/static/img/music/mus3.jpg',
           '/static/img/music/mus4.jpg', '/static/img/music/mus5.jpg', '/static/img/music/mus6.jpg']
@@ -40,7 +40,7 @@ const urls = {
       {
         'test_id|+100': 3456,
         'test_name': '@ctitle(20)',
-        'type|1': [1, 2, 3],
+        'typeName': '@ctitle(5)',
         'test_num|+100': 3445,
         'picture_addr|1': ['/static/img/index/pg1.jpg', '/static/img/index/pg2.jpg', '/static/img/index/pg3.jpg']
       }
@@ -66,7 +66,7 @@ const urls = {
         'article_id|+100': 8884,
         'title': '@ctitle(10)',
         'upload_date': '@date("yyyy-MM-dd")',
-        'type|1': [1, 2, 3],
+        'typeName': '@ctitle(5)',
         'author': '@ctitle(10)',
         'description': '@ctitle(100)',
         'content': '@ctitle(300)',
@@ -84,7 +84,7 @@ const urls = {
         'article_id|+100': 8884,
         'title': '@ctitle(10)',
         'upload_date': '@date("yyyy-MM-dd")',
-        'type|1': [1, 2, 3],
+        'typeName': '@ctitle(5)',
         'author': '@ctitle(10)',
         'content': '@ctitle(300)',
         'read_num|+100': 5432,
@@ -100,7 +100,7 @@ const urls = {
       'musician': '@ctitle(20)',
       'upload_date': '@date("yyyy-MM-dd")',
       'description': '@ctitle(100)',
-      'type|1': [1, 2, 3, 4, 5 ],
+      'typeName': '@ctitle(5)',
       'play_num': 8900,
       'img_addr|1': ['/static/img/music/imgPg1.jpg', '/static/img/music/imgPg2.jpg', '/static/img/music/imgPg3.jpg', '/static/img/music/imgPg4.jpg', '/static/img/music/imgPg5.jpg'],
       'save_addr|1': ['/static/song/周杰伦 - 稻香.mp3', '/static/song/张韶涵 - 淋雨一直走.mp3']
@@ -116,7 +116,7 @@ const urls = {
         'musician': '@ctitle(20)',
         'upload_date': '@date("yyyy-MM-dd")',
         'description': '@ctitle(100)',
-        'type|1': [1, 2, 3, 4, 5 ],
+        'typeName': '@ctitle(5)',
         'play_num': 8900,
         'img_addr|1': ['/static/img/music/imgPg1.jpg', '/static/img/music/imgPg2.jpg', '/static/img/music/imgPg3.jpg', '/static/img/music/imgPg4.jpg', '/static/img/music/imgPg5.jpg'],
         'save_addr|1': ['/static/song/周杰伦 - 稻香.mp3', '/static/song/张韶涵 - 淋雨一直走.mp3']
@@ -131,7 +131,7 @@ const urls = {
     'papers|10': [
       {
         'test_id|+1': 34567,
-        'type': [1, 2, 3, 4],
+        'typeName': '@ctitle(5)',
         'test_name': '@ctitle(10)',
         'test_num|+100':  1000,
         'picture_addr|1': ['/static/img/music/imgPg1.jpg', '/static/img/music/imgPg2.jpg', '/static/img/music/imgPg3.jpg', '/static/img/music/imgPg4.jpg', '/static/img/music/imgPg5.jpg'],
@@ -169,18 +169,19 @@ const urls = {
       'result': '@ctitle(80)'
     }
   },
-  '/apis/artile/getCommentByArticleId': {
+  '/apis/article/getCommentByArticleId': {
     'state': 1,
     'msg': '',
     'comments|8': [
       {
-        'id|+100': 3456,
+        'id|+1': 11,
         'name': '@ctitle(10)',
+        'user_id|+1': 8888,
         'article_id|+100': 3334,
         'comment_date': '@date("yyyy-MM-dd")',
         'content': '@ctitle(100)',
         'childComments|4': [{
-          'id|+8': 3456,
+          'id|+1': 22,
           'comment_id|+100': 3998,
           'userName1': '@ctitle(10)',   /*评论者（必须为名字）*/
           'userName2': '@ctitle(10)',    /*被评论者*/
@@ -192,11 +193,11 @@ const urls = {
       }
     ]
   },
-  '/apis/artile/commitArctiltComment': {
+  '/apis/article/commitArticleComment': {
     'state': 1,
     'msg': ''
   },
-  '/apis/artile/commitUserComment': {
+  '/apis/article/commitUserComment': {
     'state': 1,
     'msg': ''
   },
@@ -208,7 +209,7 @@ const urls = {
         'forum_id|+100': 3456,
         'name': '@ctitle(10)',
         'publish_date': '@date("yyyy-MM-dd")',
-        'type|1': [1, 2, 3, 4, 5],
+        'typeName': '@ctitle(5)',
         'title': '@ctitle(10)',
         'content': '@ctitle(300)'
       }
@@ -223,7 +224,7 @@ const urls = {
       'forum_id|+100': 3456,
       'name': '@ctitle(10)',
       'publish_date': '@date("yyyy-MM-dd")',
-      'type|1': [1, 2, 3, 4, 5],
+      'typeName': '@ctitle(5)',
       'title': '@ctitle(10)',
       'content': '@ctitle(300)'
     }
@@ -298,6 +299,36 @@ const urls = {
   '/apis/record/deleteRecord': {
     'state': 1,
     'msg': ''
+  },
+  '/apis/article/getArticleType': {
+    'state': 1,
+    'msg': '',
+    'labels|5': [
+      {
+        'article_type_id|+2': 2214,
+        'article_type_name': '@ctitle(5)'
+      }
+    ]
+  },
+  '/apis/music/getMusicType': {
+    'state': 1,
+    'msg': '',
+    'labels|5': [
+      {
+        'music_type_id|+2': 2214,
+        'music_type_name': '@ctitle(5)'
+      }
+    ]
+  },
+  '/apis/test/getTestType': {
+    'state': 1,
+    'msg': '',
+    'labels|5': [
+      {
+        'test_type_id|+2': 2214,
+        'test_type_name': '@ctitle(5)'
+      }
+    ]
   }
 
 };

@@ -9,20 +9,20 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
     proxyTable: {
       '/apis':{// ‘/apis’的别名
-        target:'http://localhost:8080/#/',//target指的是要代理的url
+        target:'http://localhost:8888/',//target指的是要代理的url  192.168.0.113
         changeOrigin:true, //是否跨域
         pathRewrite:{
-          '^/apis':'' //需要rewrite重写
+          '^/apis':'/' //需要rewrite重写
         }
       }
     },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8888, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -51,7 +51,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

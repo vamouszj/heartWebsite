@@ -230,6 +230,7 @@
         vm.$ajax.post('/apis/user/changeUserInfo', vm.oldUserInfo).then(function (res) {
           if(res.data.state) {
             vm.showSuccessMsg('信息修改成功');
+            vm.getUserInfo();
           }else {
             vm.showErrMsg('信息修改失败，请稍后重试');
           }
@@ -268,6 +269,11 @@
         vm.$ajax.post('/apis/user/checkPassword', vm.password).then((res) => {
           if(res.data.state) {
             vm.showSuccessMsg('密码修改成功');
+
+            window.sessionStorage.removeItem('usr');
+            vm.$router.push({
+              name: 'index'
+            })
           }else {
             vm.showErrMsg('密码修改失败');
           }

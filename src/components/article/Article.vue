@@ -9,7 +9,7 @@
 
       <div class="container-div">
         <el-tabs v-model="activeTypeName" type="card"  @tab-click="changeArticleByType">
-          <el-tab-pane :label="pane.label" :name="pane.name" v-for="(pane, index) in typePane" :key="index">
+          <el-tab-pane :label="pane.article_type_name" :name="pane.article_type_id + ''" v-for="(pane, index) in typePane" :key="index">
             <div v-for="article in articles" @click="toOneArticle(article.article_id)" class="clearfix cursor pane-div">
               <div class="left-part">
                 <img :src="article.picture_addr" class="left-img">
@@ -56,30 +56,9 @@
   export default {
     data() {
       return {
-        activeTypeName: '1',
+        activeTypeName: '',
         typeHasChanged: false,
-        typePane: [
-          {
-            label: '情感',
-            name: '1'
-          },
-          {
-            label: '健康',
-            name: '2'
-          },
-          {
-            label: '职场',
-            name: '3'
-          },
-          {
-            label: '科普',
-            name: '4'
-          },
-          {
-            label: '成长',
-            name: '5'
-          },
-        ],
+        typePane: [],
         articles: [],
         pagination: {
           currentPage: 1,
@@ -93,7 +72,7 @@
     mounted() {
       let vm = this;
 
-      vm.getArticles('1', 1, 10);
+      vm.getArticleType();
 
       if(window.sessionStorage.getItem('usr')) {
         vm.showHome = true;
@@ -102,6 +81,18 @@
       }
     },
     methods: {
+      getArticleType() {
+        let vm = this;
+
+        vm.$ajax.post('/apis/article/getArticleType').then((res) => {
+          if(res.data.state) {
+            vm.typePane = res.data.labels;
+
+            vm.activeTypeName = vm.typePane[0].article_type_id + '';
+            vm.getArticles(vm.activeTypeName, 1, 10);
+          }
+        });
+      },
       getArticles(type, currentPage, currentPageSize) {
         let vm = this;
         let obj = {};
