@@ -169,18 +169,19 @@ const urls = {
       'result': '@ctitle(80)'
     }
   },
-  '/apis/artile/getCommentByArticleId': {
+  '/apis/article/getCommentByArticleId': {
     'state': 1,
     'msg': '',
     'comments|8': [
       {
-        'id|+100': 3456,
+        'id|+1': 11,
         'name': '@ctitle(10)',
+        'user_id|+1': 8888,
         'article_id|+100': 3334,
         'comment_date': '@date("yyyy-MM-dd")',
         'content': '@ctitle(100)',
         'childComments|4': [{
-          'id|+8': 3456,
+          'id|+1': 22,
           'comment_id|+100': 3998,
           'userName1': '@ctitle(10)',   /*评论者（必须为名字）*/
           'userName2': '@ctitle(10)',    /*被评论者*/
@@ -192,11 +193,11 @@ const urls = {
       }
     ]
   },
-  '/apis/artile/commitArctiltComment': {
+  '/apis/article/commitArticleComment': {
     'state': 1,
     'msg': ''
   },
-  '/apis/artile/commitUserComment': {
+  '/apis/article/commitUserComment': {
     'state': 1,
     'msg': ''
   },

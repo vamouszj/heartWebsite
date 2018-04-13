@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: './',
     proxyTable: {
       '/apis':{// ‘/apis’的别名
-        target:'http://192.168.0.113:8888/',//target指的是要代理的url  192.168.0.113
+        target:'http://localhost:8888/',//target指的是要代理的url  192.168.0.113
         changeOrigin:true, //是否跨域
         pathRewrite:{
           '^/apis':'/' //需要rewrite重写

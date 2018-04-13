@@ -16,10 +16,13 @@
         <div class="line"></div>
       </div>
       <div style="width: 100px; font-size: 14px; float: right; margin-top: 76px; margin-right: 100px; color: #909399;">
-        <ul class="login-ul"v-if="!(showSelect || showHome)">
+        <ul class="login-ul" v-if="!(showSelect || showHome)">
           <li><el-button type="text" @click="dialogLoginVisible = true">登录 &nbsp; | &nbsp; </el-button>
           <li><el-button type="text" @click="dialogRegistVisible = true">注册</el-button></li>
         </ul>
+        <div v-else>
+          <el-button type="text"  @click="logOff">退出</el-button>
+        </div>
       </div>
 
       <el-dialog title="登录" :visible.sync="dialogLoginVisible" width="37%">
@@ -146,6 +149,12 @@
       };
     },
     methods: {
+      logOff() {
+        let vm = this;
+        window.sessionStorage.removeItem('usr');
+
+        vm.showSelect = false;
+      },
       checkAccount() {
         let vm = this;
 
@@ -245,9 +254,8 @@
         let ary = ['', '/', '/article', '/music', '/test', '/forum', '/home'];
 
         this.$router.push(ary[key]);
-
-
       }
+
     }
   }
 

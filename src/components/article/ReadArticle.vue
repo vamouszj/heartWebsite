@@ -48,7 +48,7 @@
 
             <!--多级评论-->
             <div class="more-level-container" :ref="item.id">
-              <div  v-for="child in item.childComments">
+              <div  v-for="child in item.childComments"  v-if="child.id">
                 <p class="more-level-comment">
                   <span class="more-level-name">{{child.userName1}}</span>
                   <span style="color: #000;">回复</span>
@@ -62,19 +62,21 @@
 
                 <div  class="display-none" :ref="item.id + '' + child.id">
                   <div style="padding: 10px 20px">
-                    <el-input v-model="message" :placeholder="'回复 ' + child.userName1"></el-input>
+                    <el-input :ref="item.id + child.id + '*'" :placeholder="'回复 ' + child.userName1"></el-input>
                   </div>
                   <div class="submit-child-comment">
-                    <el-button type="success" size="small" @click="submitCommit(child.user_one, child.comment_id)">提交</el-button>
+                    <el-button type="success" size="small" @click="submitCommit(child.user_one, item.id, item.id + child.id + '*')">
+                      提交
+                    </el-button>
                   </div>
                 </div>
               </div>
               <div>
                 <div style="padding: 10px 20px">
-                  <el-input v-model="message" placeholder="请输入你的观点"></el-input>
+                  <el-input placeholder="请输入你的观点" :ref="item.id + '*'"></el-input>
                 </div>
                 <div class="submit-button">
-                  <el-button type="success" size="small">提交</el-button>
+                  <el-button type="success" size="small" @click="submitCommit(item.user_id, item.id, item.id + '*')">提交</el-button>
                 </div>
               </div>
             </div>
@@ -133,7 +135,7 @@
       getCommentByArticleId() {
         let vm = this;
 
-        vm.$ajax.post('/apis/artile/getCommentByArticleId', {articleId: vm.articleId}).then(function (res) {
+        vm.$ajax.post('/apis/article/getCommentByArticleId', {articleId: vm.articleId}).then(function (res) {
           if(res.data.state) {
             vm.comments = res.data.comments;
           }else {
@@ -153,24 +155,29 @@
           vm.$refs[id][0].style.display = 'none';
         }
       },
-      submitCommit(userId2, commentId) {  //在commentId的下面当前登录用户给userName2的用户进行评论
+      submitCommit(userId2, commentId, msgRef) {  //在commentId的下面当前登录用户给userName2的用户进行评论
         let vm = this;
+
         let usr = window.sessionStorage.getItem('usr');
         if(!usr) {
           vm.showErrMsg('请先登录');
-          vm.message = '';
+          vm.$refs[msgRef][0].currentValue = '';
           return;
         }
 
-        if(!vm.message) {
+        if(!vm.$refs[msgRef][0].currentValue) {
           vm.showErrMsg('评论内容不可为空');
-          vm.message = '';
+          vm.$refs[msgRef][0].currentValue = '';
           return;
         }
 
 
-        vm.$ajax.post('/apis/artile/commitUserComment', {message: vm.message, commentId: commentId, userId2: userId2}).then((res) => {
-          vm.message = '';
+        vm.$ajax.post('/apis/article/commitUserComment', {
+          message: vm.$refs[msgRef][0].currentValue,
+          commentId: commentId,
+          userId2: userId2
+        }).then((res) => {
+          vm.$refs[msgRef][0].currentValue = '';
 
           if(res.data.state) {
             vm.getCommentByArticleId();
@@ -192,8 +199,8 @@
           return;
         }
 
-        vm.$ajax.post('/apis/artile/commitArctiltComment', {
-          article_id: vm.articleId,
+        vm.$ajax.post('/apis/article/commitArticleComment', {
+          articleId: vm.articleId,
           message: vm.message
         }).then((res) => {
           vm.message = '';
