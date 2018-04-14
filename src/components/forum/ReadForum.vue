@@ -60,19 +60,19 @@
 
                 <div  style="display: none" :ref="item.id + '' + child.id">
                   <div style="padding: 10px 20px">
-                    <el-input :ref="item.id + child.id + '*'" :placeholder="'回复 ' + child.userName1"></el-input>
+                    <input class="text" :ref="item.id  + '*' + child.id" :placeholder="'回复 ' + child.userName1"></input>
                   </div>
                   <div class="submit-child-comment">
-                    <el-button type="success" size="small" @click="submitCommit(child.user_one, child.comment_id, item.id + child.id + '*')">提交</el-button>
+                    <el-button type="success" size="small" @click="submitCommit(child.user_one, child.comment_id, item.id  + '*' + child.id)">提交</el-button>
                   </div>
                 </div>
               </div>
               <div>
                 <div style="padding: 10px 20px">
-                  <el-input placeholder="请输入你的观点" :ref="item.id + '*'"></el-input>
+                  <input class="text" placeholder="请输入你的观点" :ref="'*' + item.id"></input>
                 </div>
                 <div class="submit-button">
-                  <el-button type="success" size="small" @click="submitCommit(item.user_id, item.id, item.id + '*')">提交</el-button>
+                  <el-button type="success" size="small" @click="submitCommit(item.user_id, item.id, '*' + item.id)">提交</el-button>
                 </div>
               </div>
             </div>
@@ -156,26 +156,28 @@
         let usr = window.sessionStorage.getItem('usr');
         if(!usr) {
           vm.showErrMsg('请先登录');
-          vm.$refs[msgRef][0].currentValue = '';
+          vm.$refs[msgRef][0].value = '';
           return;
         }
 
-        if(!vm.$refs[msgRef][0].currentValue) {
-          vm.showErrMsg('评论内容不可为空');
-          vm.$refs[msgRef][0].currentValue = '';
-          return;
-        }
-
-        vm.$ajax.post('/apis/forum/commitUserComment', {
-          message: vm.$refs[msgRef][0].currentValue,
-          commentId: commentId,
-          userId2: userId2
-        }).then((res) => {
-          vm.$refs[msgRef][0].currentValue = '';
-
-          if(res.data.state) {
-            vm.getCommentByArticleId();
+        vm.$nextTick(() => {
+          if(!vm.$refs[msgRef][0].value) {
+            vm.showErrMsg('评论内容不可为空');
+            vm.$refs[msgRef][0].value = '';
+            return;
           }
+
+          vm.$ajax.post('/apis/forum/commitUserComment', {
+            message: vm.$refs[msgRef][0].value,
+            commentId: commentId,
+            userId2: userId2
+          }).then((res) => {
+            vm.$refs[msgRef][0].value = '';
+
+            if(res.data.state) {
+              vm.getCommentByArticleId();
+            }
+          });
         });
       },
       submitArticleComment() {

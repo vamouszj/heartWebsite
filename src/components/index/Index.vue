@@ -31,7 +31,7 @@
           <div v-for="(item, index) in musics" style="width: 30%;display: inline-block">
             <div class="recent-work-wrap">
               <div>
-                <img :src="item.img_addr">
+                <img :src="musicImg[index]">
                 <div class="overlay"  @click="toOneMusic(item.music_id)">
                   <div class="recent-work-inner">
                     <h3>{{item.name}}</h3>
@@ -93,7 +93,9 @@
         articles: [],
         musics: [],
         testPages: [],
-        showHome: false
+        showHome: false,
+        musicImg: ['/static/img/music/mus1.jpg', '/static/img/music/mus2.jpg', '/static/img/music/mus3.jpg',
+          '/static/img/music/mus4.jpg', '/static/img/music/mus5.jpg', '/static/img/music/mus6.jpg']
       };
     },
     mounted() {
@@ -154,7 +156,7 @@
       },
       toOneMusic(num) {
         /*window.open('http://localhost:8080/#/play/' + num, '_blank');*/
-        window.open('http://192.168.0.113:8888/#/play/' + num, '_blank');
+        window.open('http://localhost:8888/#/play/' + num, '_blank');
       },
       toOneTest(num) {
         this.$router.push({

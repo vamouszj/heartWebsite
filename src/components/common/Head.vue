@@ -154,6 +154,7 @@
         window.sessionStorage.removeItem('usr');
 
         vm.showSelect = false;
+        vm.$router.push('/');
       },
       checkAccount() {
         let vm = this;

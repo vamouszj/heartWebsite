@@ -109,7 +109,6 @@
       getMusics(type, currentPage) {
         let vm = this;
         let obj = {};
-        console.log(type);
 
         Object.assign(obj, {type: type}, {currentPage: currentPage});
 
@@ -150,7 +149,7 @@
       },
       toOneMusic(num) {
         /*window.open('http://localhost:8080/#/play/' + num, '_blank');*/
-        window.open('http://192.168.0.113:8888/#/play/' + num, '_blank');
+        window.open('http://localhost:8888/#/play/' + num, '_blank');
       }
     },
     components: {

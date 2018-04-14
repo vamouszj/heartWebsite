@@ -55,7 +55,7 @@ const urls = {
     'msg': '成功'
   },
   '/apis/user/login': {
-    'state|1': [true, false],
+    'state': 1,
     'msg': '成功'
   },
   '/apis/article/getArticleByType': {

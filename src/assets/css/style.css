@@ -57,3 +57,11 @@
 .ml10 {
   margin-left: 10px;
 }
+.text {
+  width: 98%;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  border-radius: 4px;
+}
