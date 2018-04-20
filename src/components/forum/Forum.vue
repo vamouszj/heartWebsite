@@ -7,10 +7,15 @@
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>心理论坛</el-breadcrumb-item>
       </el-breadcrumb>
+      <div class="clearfix">
+        <el-button @click="showMyForums" style="float: right;margin-left: 8px">查看我发表的帖子</el-button>
+        <el-button type="primary" @click="toAddForum" style="float: right">发表帖子</el-button>
+      </div>
 
       <div class="container-div">
-        <div v-for="forum in forums" @click="toOneForum(forum.forum_id)" class="cursor forum-item clearfix">
-          <div class="forum-outer">
+
+        <div v-for="forum in forums" class="cursor forum-item clearfix">
+          <div class="forum-outer"  @click="toOneForum(forum.forum_id)">
             <h3><span class="mr10">{{forum.typeName}}</span> {{forum.title}}</h3>
 
             <div style="margin: 10px auto;">
@@ -21,6 +26,7 @@
               {{forum.content.substring(0, 100) + '...'}}
             </p>
           </div>
+          <span style="color: #409EFF;margin: 10px;" v-if="showMySelf" @click="deleteOneForum(forum.forum_id)">删除</span>
         </div>
 
         <div class="mt25">
@@ -55,7 +61,8 @@
         },
         flag: true,
         forums: [],
-        showHome: false
+        showHome: false,
+        showMySelf: false
       };
     },
     mounted() {
@@ -83,6 +90,29 @@
           }
         });
       },
+      showMyForums() {
+        let vm = this;
+
+        vm.$ajax.post('/apis/forum/getMyForums').then(function (res) {
+          if(res.data.state) {
+            vm.forums = res.data.forums;
+
+            vm.pagination.total = res.data.total;
+            vm.pagination.currentPage = res.data.currentPage;
+            vm.showMySelf = true;
+          }
+        });
+      },
+      deleteOneForum(forumId) {
+        let vm = this;
+
+        vm.$ajax.post('/apis/forum/deleteOneForum', {forumId: forumId}).then((res) => {
+          if(res.data.state) {
+            vm.$message('删除成功');
+            vm.showMyForums();
+          }
+        });
+      },
       handleCurrentChange(page) {
         let vm = this;
 
@@ -96,6 +126,14 @@
             forumId: num
           }
         })
+      },
+      toAddForum() {
+        this.$router.push({
+          name: 'addforum'
+        })
+      },
+      deleteMyForum(forumId) {
+
       }
     },
     components: {

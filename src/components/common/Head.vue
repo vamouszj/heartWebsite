@@ -153,6 +153,7 @@
         let vm = this;
         window.sessionStorage.removeItem('usr');
 
+        console.log(111);
         vm.showSelect = false;
         vm.$router.push('/');
       },

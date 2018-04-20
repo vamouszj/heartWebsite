@@ -14,8 +14,7 @@
           <i class="el-icon-view"></i><span class="first-icon">{{article.read_num}}</span>
           <span class="cursor second-icon"><i class="el-icon-share"></i></span>
         </div>
-        <div style="margin-bottom: 100px">
-          {{article.content}}
+        <div style="margin-bottom: 100px" v-html="article.content">
         </div>
 
         <div clas="clearfix">

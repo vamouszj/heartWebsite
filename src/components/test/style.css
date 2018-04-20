@@ -20,3 +20,9 @@
 .item-test-name {
   margin: 10px auto 20px auto;
 }
+.more {
+  text-underline: none;
+}
+.more:hover,  .more:active, .more:visited {
+  color: #000;
+}

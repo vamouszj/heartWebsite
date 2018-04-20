@@ -13,8 +13,7 @@
           <i class="el-icon-edit"></i><span class="first-icon">{{forum.name}}</span>
           <i class=" el-icon-time"></i><span class="first-icon">{{forum.publish_date}}</span>
         </div>
-        <div class="mb100">
-          {{forum.content}}
+        <div class="mb100" v-html="forum.content">
         </div>
 
         <div clas="clearfix">

@@ -37,11 +37,41 @@
       </div>
 
       <div v-show="hasResult" style="margin: 25px auto">
-        <div style="width: 98%;background: #FFF;border: 1px solid #EDEDED; border-radius: 10px;margin-top: 8px; cursor:pointer" class="clearfix">
+        <div style="width: 98%;background: #FFF;border: 1px solid #EDEDED; border-radius: 10px;margin-top: 8px;" class="clearfix">
           <h4 style="color: #336699;width: 90%;padding: 20px 15px;text-align: left;border-bottom: 1px solid #EDEDED;margin:30px auto;">{{paper.test_name}}</h4>
           <div>
-            <p style="color: #336699;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;">我的结果是:</p>
+            <p style="color: #336699;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;">我的结果是：</p>
             <p style="color: #999999;width: 90%;padding: 10px 15px 30px 15px;text-align: left;margin:5px auto;">{{answer.result}}</p>
+            <p style="color: #F3C100;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;">推荐您使用下面的方式缓解您目前的情况</p>
+
+            <div style="color: #999999;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;">
+              <div class="more cursor" style="color: #409EFF;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;" @click="toMorePage('article')">阅读文章：</div>
+              <ul class="list-item">
+                <li v-for="item in articles" class="cursor" @click="toOneArticle(item.article_id)">
+                  <img :src="item.picture_addr" style="width: 150px;height: 140px">
+                  <div style="color: #000;font-size: 13px">{{item.title}}</div>
+                </li>
+              </ul>
+            </div>
+
+            <div style="color: #999999;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;">
+              <div class="more cursor" style="color: #409EFF;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;" @click="toMorePage('music')">听音乐：</div>
+              <ul class="list-item">
+                <li v-for="item in musics" class="cursor" @click="toOneMusic(item.music_id)">
+                  <img :src="item.img_addr" style="width: 150px;height: 140px">
+                  <div style="color: #000;font-size: 13px">{{item.name}}</div>
+                </li>
+              </ul>
+            </div>
+
+            <div style="color: #999999;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;">
+              <div class="more cursor" style="color: #409EFF;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;" @click="toMorePage('forum')">查看帖子：</div>
+              <ul class="list-item-forum" >
+                <li v-for="item in forums" class="cursor" @click="toOneForum(item.forum_id)">
+                  <div>{{item.name}}</div>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div style="margin: 30px auto 40px auto;">
@@ -76,12 +106,16 @@
         answer: {},
         hasResult: false,
         resultAry: [],
-        showHome: false
+        showHome: false,
+        articles: [],
+        musics: [],
+        forums: []
       };
     },
     mounted() {
       let vm = this;
       vm.getArticlesByType();
+      vm.submitResult();
 
       if(window.sessionStorage.getItem('usr')) {
         vm.showHome = true;
@@ -135,6 +169,9 @@
         vm.$ajax.post('/apis/test/getResultByPaperId', {paperId: vm.paperId, score: vm.score}).then(function (res) {
           if(res.data.state) {
             vm.answer = res.data.answer;
+            vm.articles = res.data.articles;
+            vm.musics = res.data.musics;
+            vm.forums = res.data.forums;
             vm.hasResult = true;
           }else {
             //显示错误页面
@@ -160,11 +197,36 @@
         vm.choose = vm.resultAry[vm.number-1];
         vm.questionObj = vm.questions[vm.number];
         vm.score -= vm.choose;
-      }
+      },
+      toMorePage(router) {
+        this.$router.push({
+          name: router,
+        });
+      },
+      toOneArticle(num) {
+        this.$router.push({
+          name: 'readArticle',
+          params: {
+            articleId: num
+          }
+        })
+      },
+      toOneMusic(num) {
+        window.open('http://localhost:8888/#/play/' + num, '_blank');
+      },
+      toOneForum(num) {
+        this.$router.push({
+          name: 'readForum',
+          params: {
+            forumId: num
+          }
+        })
+      },
     },
     components: {
       Head,
       Foot
+
     }
   }
 
@@ -175,19 +237,29 @@
     width: 85%;
     margin: 20px auto;
   }
-  .clearfix:after {
-    display: table;
-    content: " ";
-    clear: both;
-  }
-  .clearfix{
-    *zoom: 1;
-  }
   .mt20 {
     margin-top: 20px;
   }
   .mb20 {
     margin-bottom: 20px;
+  }
+  .list-item, .list-item-forum {
+    width: 100%;
+    list-style-type: none;
+    display: inline-block;
+    margin-left: 50px;
+  }
+  .list-item li {
+    float: left;
+    width: 19%;
+    margin: 5px 20px;
+  }
+  .list-item-forum li {
+    font-size: 20px;
+    font-weight: 500;
+    color: #a2a9cc;
+    margin: 10px 80px;
+
   }
 </style>
 

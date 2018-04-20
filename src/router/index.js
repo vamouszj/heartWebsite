@@ -11,6 +11,8 @@ import Paper from '@/components/test/TestPaper'
 import Forum from '@/components/forum/Forum'
 import readForum from '@/components/forum/ReadForum'
 import Home from '@/components/home/Home'
+import AddForum from '@/components/forum/AddForum'
+
 
 Vue.use(Router)
 
@@ -65,6 +67,11 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/addForum',
+      name: 'addforum',
+      component: AddForum
     }
   ]
 })

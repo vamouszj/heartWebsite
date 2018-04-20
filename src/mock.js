@@ -167,7 +167,45 @@ const urls = {
       'answer_id|+1': 3456,
       'test_id|+1': 34567,
       'result': '@ctitle(80)'
-    }
+    },
+    'articles|3': [
+      {
+        'article_id|+100': 8884,
+        'title': '@ctitle(10)',
+        'upload_date': '@date("yyyy-MM-dd")',
+        'type': [1, 2, 3, 4, 5],
+        'typeName': '@ctitle(5)',
+        'author': '@ctitle(10)',
+        'description': '@ctitle(100)',
+        'content': '@ctitle(300)',
+        'read_num|+100': 5432,
+        'picture_addr|1': ['/static/img/index/pg1.jpg', '/static/img/index/pg2.jpg', '/static/img/index/pg3.jpg']
+      }
+    ],
+    'musics|3': [
+      {
+        'music_id|+1': 32164,
+        'name': '@ctitle(15)',
+        'musician': '@ctitle(20)',
+        'upload_date': '@date("yyyy-MM-dd")',
+        'description': '@ctitle(100)',
+        'type': [1, 2, 3, 4, 5],
+        'typeName': '@ctitle(5)',
+        'play_num': 8900,
+        'img_addr|1': ['/static/img/music/imgPg1.jpg', '/static/img/music/imgPg2.jpg', '/static/img/music/imgPg3.jpg', '/static/img/music/imgPg4.jpg', '/static/img/music/imgPg5.jpg'],
+        'save_addr|1': ['/static/song/周杰伦 - 稻香.mp3', '/static/song/张韶涵 - 淋雨一直走.mp3']
+      }
+    ],
+    'forums|2': [
+      {
+        'forum_id|+100': 3456,
+        'name': '@ctitle(10)',
+        'publish_date': '@date("yyyy-MM-dd")',
+        'typeName': '@ctitle(5)',
+        'title': '@ctitle(10)',
+        'content': '@ctitle(300)'
+      }
+    ]
   },
   '/apis/article/getCommentByArticleId': {
     'state': 1,
@@ -216,6 +254,26 @@ const urls = {
     ],
     total: 100,
     currentPage: 1
+  },
+  '/apis/forum/getMyForums': {
+    'state': 1,
+    'msg': '',
+    'forums|4': [
+      {
+        'forum_id|+100': 3456,
+        'name': '@ctitle(10)',
+        'publish_date': '@date("yyyy-MM-dd")',
+        'typeName': '@ctitle(5)',
+        'title': '@ctitle(10)',
+        'content': '@ctitle(300)'
+      }
+    ],
+    total: 4,
+    currentPage: 1
+  },
+  '/apis/forum/deleteOneForum': {
+    'state': 1,
+    'msg': ''
   },
   '/apis/forum/getForumByForumId': {
     'state': 1,
@@ -329,8 +387,23 @@ const urls = {
         'test_type_name': '@ctitle(5)'
       }
     ]
+  },
+  /*发表帖子*/
+  '/apis/forum/getLabels': {
+    'state': 1,
+    'msg': '',
+    'list|12': [
+      {
+        'forum_label_id|1': [1, 2, 3, 4, 5],
+        'forum_label_name': '@ctitle(5)',
+        'forum_label_status': true
+      }
+    ]
+  },
+  '/apis/forum/addForum': {
+    'state': 1,
+    'msg': ''
   }
-
 };
 
 
