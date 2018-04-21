@@ -7,7 +7,7 @@
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>心理论坛</el-breadcrumb-item>
       </el-breadcrumb>
-      <div class="clearfix">
+      <div class="clearfix" v-if="showHome">
         <el-button @click="showMyForums" style="float: right;margin-left: 8px">查看我发表的帖子</el-button>
         <el-button type="primary" @click="toAddForum" style="float: right">发表帖子</el-button>
       </div>
