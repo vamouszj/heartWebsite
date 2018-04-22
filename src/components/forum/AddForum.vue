@@ -104,6 +104,7 @@
         }
 
         vm.forum.content = vm.editorContent;
+        vm.forum.description = text;
 
         vm.$ajax.post('/apis/forum/addForum', {forum: vm.forum}).then((res) => {
           if(res.data.state) {

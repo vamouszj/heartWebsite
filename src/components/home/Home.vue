@@ -212,17 +212,17 @@
       changeCheck() {
         let vm = this;
 
-        if(vm.user.nickname.length <= 0 || vm.user.birthday.length <= 0) {
+        if(vm.oldUserInfo.nickname.length <= 0 || vm.oldUserInfo.birthday.length <= 0) {
           vm.showErrMsg('昵称或出生日期不可为空');
           return;
         }
 
-        if(vm.user.nickname.length > 12) {
+        if(vm.oldUserInfo.nickname.length > 12) {
           vm.showErrMsg('昵称不能超过12位');
           return;
         }
 
-        if(vm.user.signature.length > 200) {
+        if(vm.oldUserInfo.signature.length > 200) {
           vm.showErrMsg('签名字数过多');
           return;
         }

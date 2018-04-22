@@ -247,6 +247,7 @@ const urls = {
         'forum_id|+100': 3456,
         'name': '@ctitle(10)',
         'publish_date': '@date("yyyy-MM-dd")',
+        'description': '@ctitle(100)',
         'typeName': '@ctitle(5)',
         'title': '@ctitle(10)',
         'content': '@ctitle(300)'
@@ -263,6 +264,7 @@ const urls = {
         'forum_id|+100': 3456,
         'name': '@ctitle(10)',
         'publish_date': '@date("yyyy-MM-dd")',
+        'description': '@ctitle(100)',
         'typeName': '@ctitle(5)',
         'title': '@ctitle(10)',
         'content': '@ctitle(300)'
@@ -282,6 +284,7 @@ const urls = {
       'forum_id|+100': 3456,
       'name': '@ctitle(10)',
       'publish_date': '@date("yyyy-MM-dd")',
+      'description': '@ctitle(100)',
       'typeName': '@ctitle(5)',
       'title': '@ctitle(10)',
       'content': '@ctitle(300)'

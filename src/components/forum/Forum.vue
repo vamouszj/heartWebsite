@@ -23,7 +23,7 @@
               <i class="el-icon-date mr10"></i><span>{{forum.publish_date}}</span>
             </div>
             <p class="forum-item-p">
-              {{forum.content.substring(0, 100) + '...'}}
+              {{forum.description.substring(0, 100) + '...'}}
             </p>
           </div>
           <span style="color: #409EFF;margin: 10px;" v-if="showMySelf" @click="deleteOneForum(forum.forum_id)">删除</span>
