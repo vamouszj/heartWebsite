@@ -26,3 +26,11 @@
 .more:hover,  .more:active, .more:visited {
   color: #000;
 }
+.question-item {
+  width: 100%;
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom:40px;
+  text-align: left;
+  padding: 10px 42px;
+}

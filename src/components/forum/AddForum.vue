@@ -12,23 +12,24 @@
           <el-form-item prop="title" label="标题">
             <el-input v-model="forum.title" placeholder="请输入标题"></el-input>
           </el-form-item>
+          <el-form-item label="内容" class="clearfix" >
+            <div id="editorElem" style="text-align:left;" ref="content"></div>
+            <!--<quill-editor v-else ref="myTextEditor" v-model="forum.content" :config="editorOption"></quill-editor>-->
+          </el-form-item>
           <el-form-item  label="类型" class="clearfix">
-            <el-select v-model="forum.forum_label_id" placeholder="请选择" style="float: left">
-              <el-option
-                v-for="(item, key) in typeList"
-                :key="item.key"
-                :label="item.forum_label_name"
-                :value="item.forum_label_id">
-              </el-option>
-            </el-select>
+            <div class="left" style="position:absolute;z-index: 10000;pointer-events:none;">
+              <el-select v-model="forum.forum_label_id" placeholder="请选择" class="clearfix">
+                <el-option
+                  v-for="(item, key) in typeList"
+                  :key="item.key"
+                  :label="item.forum_label_name"
+                  :value="item.forum_label_id">
+                </el-option>
+              </el-select>
+            </div>
           </el-form-item>
           <el-form-item prop="publish_date" label="上传日期">
             <el-input v-model="forum.publish_date" placeholder="" :disabled="disabled"></el-input>
-          </el-form-item>
-
-          <el-form-item label="内容" class="clearfix">
-            <div id="editorElem" style="text-align:left" class="clearfix" ref="content"></div>
-            <!--<quill-editor v-else ref="myTextEditor" v-model="forum.content" :config="editorOption"></quill-editor>-->
           </el-form-item>
         </el-form>
 

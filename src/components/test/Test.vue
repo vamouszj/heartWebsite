@@ -160,7 +160,14 @@
         vm.getTests(vm.activeTypeId, page);
       },
       toOneTest(num) {
-        this.$router.push({
+        let vm = this;
+
+        if(!sessionStorage.getItem('usr')) {
+          vm.$message.error('请先登录');
+          return;
+        }
+
+        vm.$router.push({
           name: 'testPaper',
           params: {
             paperId: num

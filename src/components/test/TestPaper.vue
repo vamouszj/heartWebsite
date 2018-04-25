@@ -17,7 +17,7 @@
             共<b style="color: #63C9C2;margin:auto 10px">{{questions.length}}</b>题</p>
         </div>
 
-        <div style="width: 100%; height: 200px;margin-top: 50px;margin-bottom:40px;text-align: left;padding: 10px 42px" class="clearfix">
+        <div class="question-item clearfix">
           <p>{{number + '. '}}{{questionObj.title_name}}</p>
           <div class="mt20 mb20" style="padding-left: 15px" v-for="(item, index) in questionObj.chooses">
             <el-radio v-model="choose" :label="labelAry[index]" @change="checkToNext">{{item}}</el-radio>
@@ -68,7 +68,7 @@
               <div class="more cursor" style="color: #409EFF;width: 90%;padding: 10px 15px;text-align: left;margin:5px auto;" @click="toMorePage('forum')">查看帖子：</div>
               <ul class="list-item-forum" >
                 <li v-for="item in forums" class="cursor" @click="toOneForum(item.forum_id)">
-                  <div>{{item.name}}</div>
+                  <div>{{item.title}}</div>
                 </li>
               </ul>
             </div>
@@ -115,12 +115,12 @@
     mounted() {
       let vm = this;
       vm.getArticlesByType();
-      vm.submitResult();
 
       if(window.sessionStorage.getItem('usr')) {
         vm.showHome = true;
       }else {
         vm.showHome = false;
+
       }
     },
     methods: {
@@ -138,7 +138,7 @@
         vm.$ajax.post('/apis/test/getQuestionByPaperId', {paperId: vm.paperId}).then(function (res) {
           if(res.data.state) {
             vm.questions = res.data.questions;
-            vm.questionObj = vm.questions[vm.number];
+            vm.questionObj = vm.questions[0];
           }else {
             //显示错误页面
           }
@@ -233,6 +233,7 @@
 </script>
 
 <style scoped>
+  @import "style.css";
   .container {
     width: 85%;
     margin: 20px auto;
