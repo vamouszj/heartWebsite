@@ -12,7 +12,7 @@
         <div style="margin:20px auto">
           <i class="el-icon-time"></i><span class="first-icon">{{article.upload_date}}</span>
           <i class="el-icon-view"></i><span class="first-icon">{{article.read_num}}</span>
-          <span class="cursor second-icon"><i class="el-icon-share"></i></span>
+          <span class="cursor second-icon copyBtn" :data-clipboard-text="url"><i class="el-icon-share"></i></span>
         </div>
         <div style="margin-bottom: 100px" v-html="article.content">
         </div>
@@ -97,6 +97,7 @@
 <script>
   import Head from '../common/Head'
   import Foot from '../common/Foot'
+  import Clipboard from 'clipboard';
 
   export default {
     data() {
@@ -105,13 +106,16 @@
         article: '',
         comments: [],
         message: '',
-        showHome: false
+        showHome: false,
+        url: ''
       };
     },
     mounted() {
       let vm = this;
       vm.getArticlesById();
       vm.getCommentByArticleId();
+      let clipboard = new Clipboard('.copyBtn');
+      vm.url ='http://localhost:8888/#/article/' + vm.articleId;
 
       if(window.sessionStorage.getItem('usr')) {
         vm.showHome = true;

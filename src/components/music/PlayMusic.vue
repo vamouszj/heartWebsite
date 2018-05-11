@@ -10,9 +10,9 @@
       </div>
       <div class="playWrap">
         <audio :src="music.save_addr" ref="audio" autobuffer autoloop @durationchange="changeDuration"></audio>
-        <a href="#" id="prebtn" class="pre" @click="prevMusic"></a>
-        <a href="#" ref="playBtn" class="pause" @click="playMusic"></a>
-        <a href="#" id="nextbtn" class="next" @click="nextMusic"></a>
+        <a  id="prebtn" class="pre" @click="prevMusic"></a>
+        <a ref="playBtn" class="pause" @click="playMusic"></a>
+        <a id="nextbtn" class="next" @click="nextMusic"></a>
         <!-- 进度条 -->
         <div ref="process" class="process">
           <span ref="ped" class="pr_played" style="width: 0%;"></span>
@@ -22,8 +22,8 @@
       </div>
       <div class="btns">
         <!--<a href="#" class="comment">评论</a>-->
-        <a href="#" class="collect">已听({{music.play_num}})</a>
-        <a href="#" class="share">分享</a>
+        <a  class="collect">已听({{music.play_num}})</a>
+        <a  class="share copyBtn" :data-clipboard-text="url" type="text">分享</a>
         <a :href="music.save_addr" :download="music.save_addr" id="down" class="download">下载</a>
       </div>
     </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+    import Clipboard from 'clipboard';
     export default {
         name: "play",
         data() {
@@ -39,14 +40,17 @@
             music: {},
             timeNow: 0,
             timeDuration: 0,
-            time: ''
+            time: '',
+            url: ''
           }
         },
         mounted() {
           let vm = this;
           vm.addEventListeners();
+          let clipboard = new Clipboard('.copyBtn');
 
           vm.getMusic({musicId: vm.musicId});
+          vm.url ='http://localhost:8888/#/play/' + vm.musicId;
         },
         beforeDestroyed() {
           this.removeEventListeners()
@@ -114,7 +118,7 @@
 
             vm.playMusic();
             //根据当前的歌曲ID得到前一首歌曲信息
-            vm.getMusic({musicId: vm.musicId, prev: true});
+            vm.getMusic({musicId: vm.musicId - 1, prev: true});
           },
           nextMusic() {
             let vm = this;
@@ -122,7 +126,7 @@
 
             //根据当前的歌曲ID得到前一首歌曲信息
             vm.playMusic();
-            vm.getMusic({musicId: vm.musicId, next: true});
+            vm.getMusic({musicId: vm.musicId + 1, next: true});
           },
           controlMouseDown(event) {
             event = event || window.event;

@@ -93,7 +93,7 @@
     name: 'testPaper',
     data() {
       return {
-        labelAry: [10, 9, 7, 5],
+        labelAry: [10, 5, 7, 3],
         number: 1,
         showButton: false,
         showSubmit: false,
@@ -204,23 +204,25 @@
         });
       },
       toOneArticle(num) {
-        this.$router.push({
+        window.open('http://localhost:8888/#/article/' + num, '_blank');
+/*        this.$router.push({
           name: 'readArticle',
           params: {
             articleId: num
           }
-        })
+        })*/
       },
       toOneMusic(num) {
         window.open('http://localhost:8888/#/play/' + num, '_blank');
       },
       toOneForum(num) {
-        this.$router.push({
+        window.open('http://localhost:8888/#/readForum/' + num, '_blank');
+/*        this.$router.push({
           name: 'readForum',
           params: {
             forumId: num
           }
-        })
+        })*/
       },
     },
     components: {

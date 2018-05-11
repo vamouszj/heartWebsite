@@ -53,10 +53,10 @@
               </div>
               <div class="clearfix">
                 <div style="width: 84%;float: right;text-align: left;font-family: 'Microsoft Yahei';color: #333333;">
-                  <P style="margin: 5px auto 10px auto;color: #66b1ff;font-size: 18px;">{{record.test_name}}</P>
+                  <P style="margin: 5px auto 10px auto;color: #66b1ff;font-size: 18px;" @click="toTest(record.test_id)">{{record.test_name}}</P>
                   <p style="color: #999999;font-size: 16px">{{record.test_result}}</p>
-                  <div class="clearfix" @click="deleteRecord(record.record_id)">
-                    <span style="display:block;float: right;margin-right:30px;color: dodgerblue;font-size: 14px;line-height: 45px;cursor: pointer;">删除</span>
+                  <div class="clearfix">
+                    <span style="display:block;float: right;margin-right:30px;color: dodgerblue;font-size: 14px;line-height: 45px;cursor: pointer;"  @click="deleteRecord(record.record_id)">删除</span>
                   </div><br>
                 </div>
               </div>
@@ -186,6 +186,9 @@
       }
     },
     methods: {
+      toTest(num) {
+        window.open('http://localhost:8888/#/paper/' + num, '_blank');
+      },
       getUserInfo() {
         let vm = this;
 
