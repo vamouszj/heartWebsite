@@ -78,7 +78,8 @@
           total: 0
         },
         flag: true,
-        showHome: false
+        showHome: false,
+        musics: ''
       };
     },
     mounted() {
@@ -117,6 +118,7 @@
             let len = res.data.musics.length;
             vm.music.leftPart = res.data.musics.slice(0, len / 2);
             vm.music.rightPart = res.data.musics.slice(len / 2, len);
+            vm.musics = res.data.musics;
 
             vm.pagination.total = res.data.total;
             vm.pagination.currentPage = currentPage;
@@ -149,6 +151,14 @@
       },
       toOneMusic(num) {
         /*window.open('http://localhost:8080/#/play/' + num, '_blank');*/
+        let ary = [];
+        let vm = this;
+
+        vm.musics.forEach((item) => {
+          ary.push(item.music_id);
+        });
+        window.sessionStorage.setItem('musicIds', JSON.stringify({'ids': ary}));
+
         window.open('http://localhost:8888/#/play/' + num, '_blank');
       }
     },

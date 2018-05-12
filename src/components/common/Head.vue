@@ -69,6 +69,7 @@
           <el-form-item label="确认密码" :label-width="formLabelWidth">
             <el-input v-model="rePassword"
                       auto-complete="off"
+                      type="password"
                       @blur="checkRePassword"
                       placeholder="请确认密码"
                       clearable>

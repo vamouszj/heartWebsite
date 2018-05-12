@@ -9,7 +9,7 @@
         <p class="description-param">{{music.description}}</p>
       </div>
       <div class="playWrap">
-        <audio :src="music.save_addr" ref="audio" autobuffer autoloop @durationchange="changeDuration"></audio>
+        <audio :src="music.save_addr" ref="audio" autobuffer autoloop @durationchange="changeDuration"  autoplay="autoplay"></audio>
         <a  id="prebtn" class="pre" @click="prevMusic"></a>
         <a ref="playBtn" class="pause" @click="playMusic"></a>
         <a id="nextbtn" class="next" @click="nextMusic"></a>
@@ -41,7 +41,8 @@
             timeNow: 0,
             timeDuration: 0,
             time: '',
-            url: ''
+            url: '',
+            musicIds: []
           }
         },
         mounted() {
@@ -51,6 +52,8 @@
 
           vm.getMusic({musicId: vm.musicId});
           vm.url ='http://localhost:8888/#/play/' + vm.musicId;
+
+          vm.musicIds = JSON.parse(window.sessionStorage.getItem('musicIds')).ids;
         },
         beforeDestroyed() {
           this.removeEventListeners()
@@ -80,6 +83,7 @@
           getMusic(params) {
             let vm = this;
             vm.music = {};
+            let playBtn = vm.$refs.playBtn;
 
             vm.music.save_addr = '';
             vm.$ajax.post('/apis/music/getMusicById', params).then(function (res) {
@@ -89,9 +93,17 @@
                 vm.$nextTick(function() {
                   vm.timeNow = 0;
                   vm.timeDuration = 0;
-                  vm.playMusic();
+                  vm.timePass();
+                  playBtn.className = 'play';
                   vm.$refs.bgImage.style.background = 'url(' + vm.music.img_addr + ')';
                 });
+
+                vm.$router.push({
+                  name: 'play',
+                  params: {
+                    musicId: vm.musicId
+                  }
+                })
               }else {
                 //显示错误页面
               }
@@ -115,18 +127,33 @@
           prevMusic() {
             let vm = this;
             let audio = vm.$refs.audio;
+            let index = vm.musicIds.indexOf(+vm.musicId);
+            let prevIndex = index - 1;
 
-            vm.playMusic();
+            if(prevIndex < 0) {
+              prevIndex = vm.musicIds.length - 1;
+            }
+
+            vm.musicId = vm.musicIds[prevIndex];
+
+            //vm.playMusic();
             //根据当前的歌曲ID得到前一首歌曲信息
-            vm.getMusic({musicId: vm.musicId - 1, prev: true});
+            vm.getMusic({musicId: vm.musicId, prev: true});
           },
           nextMusic() {
             let vm = this;
             let audio = vm.$refs.audio;
+            let index = vm.musicIds.indexOf(+vm.musicId);
+            let nextIndex = index + 1;
 
             //根据当前的歌曲ID得到前一首歌曲信息
-            vm.playMusic();
-            vm.getMusic({musicId: vm.musicId + 1, next: true});
+            if(nextIndex > vm.musicIds.length - 1) {
+              nextIndex = 0;
+            }
+
+            vm.musicId = vm.musicIds[nextIndex];
+
+            vm.getMusic({musicId: vm.musicId, next: true});
           },
           controlMouseDown(event) {
             event = event || window.event;
